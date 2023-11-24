@@ -1,7 +1,7 @@
 // PostForm.js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addPost, login, register } from '../reducers/postReducer';
+import { addPost, load,  login, register } from '../reducers/postReducer';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -23,6 +23,10 @@ const LoginForm = () => {
     const isLoggedIn = useSelector((state) => state.posts.isLoggedIn);
 	const user = useSelector((state) => state.posts.posts);
 	
+	useEffect(() => {
+
+	dispatch(load());
+	}, []);
     useEffect(() => {
         console.log("UE:"+isLoggedIn)
 		console.log("UE:USER:")
@@ -43,8 +47,10 @@ const LoginForm = () => {
 	}
 	
     const handleLogin = () => {
+		
         
         if (post.username && post.password) {
+			
            dispatch(login({username:post.username,password:post.password}));
         	setPost(initilizePost);
 		}

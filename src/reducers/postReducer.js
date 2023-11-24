@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 //import {NavLogin} from '../App'
 import {Login} from '../components/login';
 import { useNavigate } from 'react-router-dom';
+
+
+var data = [];
 var temp = "false";
 const Nav = () => {
 const navigate = useNavigate();
@@ -13,6 +16,7 @@ const postSlice = createSlice({
   
   name: 'posts',
   initialState: { 
+    AllUsers: [],
     posts: [],
     isLoggedIn: "false",
   },
@@ -74,10 +78,29 @@ const postSlice = createSlice({
       registerUser();
     },
 
+    login: (state, action) => {
+     
+      var username= action.payload.username;
+      var password= action.payload.password;
+      console.log("login:"+username+password)
+      console.log("login:"+data.map((post) => post.username));
+      const userExists = data.some((user) => user.username === username && user.password === password);
+      if(userExists){
+        console.log("login success")
+        temp="true";
+        state.isLoggedIn = temp;
+        console.log("....?")
+      }
+      else{
+        console.log("login failed")
+        temp="false";
+        state.isLoggedIn = temp;
+      }
+    },
     load: (state, action) => {
       
-     var username= action.payload.username;
-     var password= action.payload.password;
+    //  var username= action.payload.username;
+    //  var password= action.payload.password;
       const getUsers = async () => {
         try {
           const response = await fetch('https://smooth-comfort-405104.uc.r.appspot.com/document/findAll/userx', {
@@ -90,21 +113,22 @@ const postSlice = createSlice({
           });
           
           if (response.ok) {
-            const users = await response.json();
+            const users = await response.json();            
+            data = users.data;
             console.log('All users:', users);
            //return true;
             //someloginfunction(users,username,password);
-            const userExists = users.data.some((user) => user.username === username && user.password === password);
-            if(userExists){
-              console.log("login success")
-              temp="true";            
-              console.log("....?")
-              //state.isLoggedIn = true;
-            }
-            else{
-              console.log("login failed")
-              temp="false";
-            }
+            // const userExists = users.data.some((user) => user.username === username && user.password === password);
+            // if(userExists){
+            //   console.log("login success")
+            //   temp="true";            
+            //   console.log("....?")
+            //   //state.isLoggedIn = true;
+            // }
+            // else{
+            //   console.log("login failed")
+            //   temp="false";
+            // }
             // Process the users array received from the server
           } else {
             console.error('Failed to fetch users:', response.statusText);
@@ -116,12 +140,16 @@ const postSlice = createSlice({
         }
       };
       getUsers();
-      state.posts.push({username:username,password:password});
-      state.isLoggedIn = temp; 
+      console.log("loading..")
+      
+      console.log("load:"+data) 
+      
+      //state.posts.push({username:username,password:password});
+      // state.isLoggedIn = temp; 
       
       // Call the getUsers function to retrieve users
       
-      console.log(state.isLoggedIn)
+      // console.log(state.isLoggedIn)
       
     }
 
@@ -130,5 +158,5 @@ const postSlice = createSlice({
 });
 
 
-export const { addPost , editPost, login, register} = postSlice.actions;
+export const { addPost , editPost, load, login, register} = postSlice.actions;
 export default postSlice.reducer;
