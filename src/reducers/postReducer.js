@@ -74,7 +74,7 @@ const postSlice = createSlice({
       registerUser();
     },
 
-    login: (state, action) => {
+    load: (state, action) => {
       
      var username= action.payload.username;
      var password= action.payload.password;
