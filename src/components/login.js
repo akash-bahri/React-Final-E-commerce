@@ -49,7 +49,10 @@ const LoginForm = () => {
 			dispatch(login({ username: post.username, password: post.password }));
 			setPost(initilizePost);
 		}
-		setLogon("INCORRECT USERNAME OR PASSWORD");
+		else setLogon("INCORRECT USERNAME OR PASSWORD");
+		setTimeout(() => { 
+			setLogon("");
+		  }, 1000);
 	}
 
 	
@@ -57,7 +60,7 @@ const LoginForm = () => {
 	return (
 		
 		<div className='login'>
-			
+			<p className='status'>{logon}</p>
 		<div>
 			
 			<div  className='main'> <input
@@ -87,7 +90,7 @@ const LoginForm = () => {
 			
 			</div>
 			<div className='main'>
-				<p style={{ color: 'red', fontWeigh: 'bold' }}>{logon}</p>
+				
 			</div>
 		
 		</div>

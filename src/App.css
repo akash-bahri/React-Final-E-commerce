@@ -102,7 +102,7 @@ padding: 20px; /* Adjust the padding value as needed */
 font-weight: bold;
 font-family:monospace;
 color: #FBFCFF;
-text-shadow: #605856 0.1em 0.1em 0.2em;
+text-shadow: #605856 0.2em 0.2em 0.4em;
 font-size: 20px;
 }
 .input {
@@ -191,7 +191,8 @@ font-size: 20px;
 
 /* Style for error message */
 .errorMessage {
-  color: red;
+  color: rgb(228, 228, 228);
+  text-shadow: #9c3c49;
   font-weight: bold;
 }
 .banner {
