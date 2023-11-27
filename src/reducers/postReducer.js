@@ -1,45 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
 import React, { useState, useEffect } from "react";
 //import {NavLogin} from '../App'
-import {Login} from '../components/login';
+import { Login } from '../components/login';
 import { useNavigate } from 'react-router-dom';
+
+
+var data = [];
+var catalog = [];
 var temp = "false";
-const Nav = () => {
-const navigate = useNavigate();
-navigate('/home');
-}
+var orders = [];
 
 const postSlice = createSlice({
-  
+
   name: 'posts',
-  initialState: { 
+  initialState: {
+    AllUsers: [],
+    catalog: [],
+    orders: [],
     posts: [],
+    data: [],
+    cart: [],
     isLoggedIn: "false",
+    currentUser: {},
   },
   reducers: {
-    addPost: (state, action) => {
-      const { data, timestamp } = action.payload;
-      state.posts.push({ data, timestamp });
-      console.log("helllo:"+data)
-      console.log(state.posts.map((post) => post.data));
-//-----------------------------------------------------------------------------------
-   
-       
-//-----------------------------------------------------------------------------------
-
-    },  
-    editPost: (state,action) => {
-      const { data, timestamp, post_id } = action.payload;
-      state.posts[post_id] = {
-        data: data,
-        timestamp: timestamp
-      }
-
-    },
-
     register: (state, action) => {
-      
-      var userdata= {
+
+      var userdata = {
         // Your data object to be sent to the API
         username: action.payload.username,
         password: action.payload.password
@@ -52,12 +39,12 @@ const postSlice = createSlice({
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization' : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc"
+              'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc"
               // Add any other headers required by your API (e.g., authorization headers)
             },
             body: JSON.stringify(userdata), // Convert data to JSON format
           });
-    
+
           if (response.ok) {
             const responseData = await response.json();
             console.log('Data posted successfully:', responseData);
@@ -75,37 +62,51 @@ const postSlice = createSlice({
     },
 
     login: (state, action) => {
-      
-     var username= action.payload.username;
-     var password= action.payload.password;
+
+      var username = action.payload.username;
+      var password = action.payload.password;
+      const userExists = data.find((user) => user.username === username && user.password === password);
+      if (userExists) {
+        console.log("login success")
+        temp = "true";
+        state.isLoggedIn = temp;
+        state.currentUser = userExists;
+      }
+      else {
+        console.log("login failed")
+        temp = "false";
+        state.isLoggedIn = temp;
+        state.currentUser = {};
+      }
+      // return temp;
+    },
+    loadstate: (state, action) => {
+      state.AllUsers = data;
+      state.catalog = catalog;
+      state.orders = orders;
+
+    },
+    load: (state, action) => {
+
+      //  var username= action.payload.username;
+      //  var password= action.payload.password;
       const getUsers = async () => {
         try {
           const response = await fetch('https://smooth-comfort-405104.uc.r.appspot.com/document/findAll/userx', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization' : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc"
+              'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc"
               // Add any other headers required by your API (e.g., authorization headers)
             } // Convert data to JSON format
           });
-          
+
+
           if (response.ok) {
             const users = await response.json();
-            console.log('All users:', users);
-           //return true;
-            //someloginfunction(users,username,password);
-            const userExists = users.data.some((user) => user.username === username && user.password === password);
-            if(userExists){
-              console.log("login success")
-              temp="true";            
-              console.log("....?")
-              //state.isLoggedIn = true;
-            }
-            else{
-              console.log("login failed")
-              temp="false";
-            }
-            // Process the users array received from the server
+            data = users.data;
+
+            console.log('Loading All users:', users.data);
           } else {
             console.error('Failed to fetch users:', response.statusText);
             // Handle errors if the request fails
@@ -115,20 +116,202 @@ const postSlice = createSlice({
           // Handle any network or other errors
         }
       };
-      getUsers();
-      state.posts.push({username:username,password:password});
-      state.isLoggedIn = temp; 
-      
-      // Call the getUsers function to retrieve users
-      
-      console.log(state.isLoggedIn)
-      
-    }
+      const getCatalog = async () => {
+        try {
+          const response = await fetch('https://smooth-comfort-405104.uc.r.appspot.com/document/findAll/catalog', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc"
+              // Add any other headers required by your API (e.g., authorization headers)
+            } // Convert data to JSON format
+          });
 
+
+          if (response.ok) {
+            const Catalogfromapi = await response.json();
+            catalog = Catalogfromapi.data;
+
+            console.log('Loading All catalog:', Catalogfromapi.data);
+          } else {
+            console.error('Failed to fetch catalog:', response.statusText);
+            // Handle errors if the request fails
+          }
+        } catch (error) {
+          console.error('Error fetching catalog:', error);
+          // Handle any network or other errors
+        }
+      };
+      getUsers();
+      getCatalog();
+    },
+    addToCart: (state, action) => {
+      state.cart = [...state.cart, action.payload];
+      // console.log("here")
+      // console.log(state.cart[0]);
+    },
+    deleteFromCart: (state, action) => {
+      state.cart = state.cart.filter((item) => item._id !== action.payload);
+    },
+    placeOrder: (state, action) => {
+      state.cart = [];
+      const order = action.payload;
+      const placeNewOrder = async () => {
+        try {
+          const response = await fetch('https://smooth-comfort-405104.uc.r.appspot.com/document/createorupdate/orders', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc"
+              // Add any other headers required by your API (e.g., authorization headers)
+            },
+            body: JSON.stringify(order), // Convert data to JSON format
+          });
+
+          if (response.ok) {
+            const responseData = await response.json();
+            console.log('Order placed successfully:', responseData);
+            // Handle successful response from the API
+          } else {
+            console.error('Failed to place order:', response.statusText);
+            // Handle errors if the request fails
+          }
+        } catch (error) {
+          console.error('Error placing order:', error);
+          // Handle any network or other errors
+        }
+      };
+      placeNewOrder();
+      const getOrders = async () => {
+        try {
+          const response = await fetch('https://smooth-comfort-405104.uc.r.appspot.com/document/findAll/orders', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc"
+              // Add any other headers required by your API (e.g., authorization headers)
+            } // Convert data to JSON format
+          });
+
+
+          if (response.ok) {
+            const Ordersfromapi = await response.json();
+            orders = Ordersfromapi.data;
+
+            console.log('Loading All catalog:', Ordersfromapi.data);
+          } else {
+            console.error('Failed to fetch catalog:', response.statusText);
+            // Handle errors if the request fails
+          }
+        } catch (error) {
+          console.error('Error fetching catalog:', error);
+          // Handle any network or other errors
+        }
+      };
+      getOrders();
+      state.orders = orders;
+
+    },
+    loadOrders: (state, action) => {
+      const getOrders = async () => {
+        try {
+          const response = await fetch('https://smooth-comfort-405104.uc.r.appspot.com/document/findAll/orders', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc"
+              // Add any other headers required by your API (e.g., authorization headers)
+            } // Convert data to JSON format
+          });
+
+
+          if (response.ok) {
+            const Ordersfromapi = await response.json();
+            orders = Ordersfromapi.data;
+
+            console.log('Loading All catalog:', Ordersfromapi.data);
+          } else {
+            console.error('Failed to fetch catalog:', response.statusText);
+            // Handle errors if the request fails
+          }
+        } catch (error) {
+          console.error('Error fetching catalog:', error);
+          // Handle any network or other errors
+        }
+      };
+      getOrders();
+      state.orders = orders;
+    },
+    DeleteOrder: (state, action) => {
+      const id = action.payload;
+      id.toString();
+      const link = `https://smooth-comfort-405104.uc.r.appspot.com/document/deleteOne/orders/${id}`;
+      const deleteOrders = async () => {
+        try {
+          const response = await fetch(link, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc"
+              // Add any other headers required by your API (e.g., authorization headers)
+            } // Convert data to JSON format
+          });
+          if (response.ok) {
+            const deleted = await response.json();
+            console.log(deleted.message);
+          } else {
+            console.error('Failed to delete', response.statusText);
+            console.log(id);
+            console.log(link);
+            // Handle errors if the request fails
+          }
+        } catch (error) {
+          console.error('Error deleting', error);
+          // Handle any network or other errors
+        }
+      };
+
+      const getOrders = async () => {
+        try {
+          const response = await fetch('https://smooth-comfort-405104.uc.r.appspot.com/document/findAll/orders', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc"
+              // Add any other headers required by your API (e.g., authorization headers)
+            } // Convert data to JSON format
+          });
+
+
+          if (response.ok) {
+            const Ordersfromapi = await response.json();
+            orders = Ordersfromapi.data;
+
+            console.log('Loading All catalog:', Ordersfromapi.data);
+          } else {
+            console.error('Failed to fetch catalog:', response.statusText);
+            // Handle errors if the request fails
+          }
+        } catch (error) {
+          console.error('Error fetching catalog:', error);
+          // Handle any network or other errors
+        }
+      };
+      deleteOrders();
+      getOrders();
+      state.orders = orders;
+    },
+    logout: (state, action) => {
+      state.isLoggedIn = "false";
+      state.currentUser = {};
+      state.cart = [];
+
+    }
   },
 
 });
 
 
-export const { addPost , editPost, login, register} = postSlice.actions;
+export const { addPost, editPost, load, logout, login, register, deleteFromCart, DeleteOrder,
+  loadstate, addToCart, placeOrder, loadOrders } = postSlice.actions;
 export default postSlice.reducer;
