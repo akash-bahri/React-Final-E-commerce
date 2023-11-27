@@ -6,6 +6,8 @@ nav {
   justify-content: space-between; /* Added to space out elements */
 }
 ul.navbutt {
+  align-items: center;
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -38,6 +40,8 @@ li.logout {
 a.navbar {
   color: white;
   text-decoration: none;
+  align-items: center;
+  justify-content: center;
 }
 
 ul {
@@ -50,6 +54,13 @@ ul {
 a.navbar {
   color: white;
   text-decoration: none;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  align-items: center;
+  justify-content: center;
+  border: solid 1px white;
 }
 /* styles.css */
 
@@ -77,6 +88,14 @@ padding: 20px; /* Adjust the padding value as needed */
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.status{ display: flex;
+  justify-content: center;
+  align-items: center;
+font-weight: bold;
+font-family:monospace;
+color: turquoise;
+text-shadow: black 0.1em 0.1em 0.2em;
 }
 .input {
   margin: 10px;
@@ -114,6 +133,17 @@ padding: 20px; /* Adjust the padding value as needed */
   background-color: #b46f00;
   color: #fffcfc;
   width: 100px;
+}
+
+.cartbuttons{
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid rgb(44, 42, 42);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #b46f00;
+  color: #fffcfc;
+  width: 200px;
 }
 .cartbutton:hover{
   background-color: #5d3900;
@@ -154,3 +184,19 @@ padding: 20px; /* Adjust the padding value as needed */
   color: red;
   font-weight: bold;
 }
+.banner {
+  display: flex;
+  justify-content: center; /* Centers content horizontally */
+  align-items: center; /* Centers content vertically */
+  padding: px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #fff;
+  width: fill; /* Adjust the width as needed */
+  margin: auto; /* Centers the banner div in the container */
+ 
+  font-weight: bold;
+  font-size: 25px;
+  background-color: rgb(154, 138, 138);
+}
+

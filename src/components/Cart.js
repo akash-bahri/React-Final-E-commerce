@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { deleteFromCart, placeOrder, loadOrders } from '../reducers/postReducer';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function Cart() {
   const [status, setStatus] = useState("");
@@ -11,55 +12,70 @@ function Cart() {
   const currentUser = useSelector((state) => state.posts.currentUser);
   const orders = useSelector((state) => state.posts.orders);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isCheckoutVisible, setIsCheckoutVisible] = useState(false);
+  
+  useEffect(() => {
+    setIsCheckoutVisible(cart.length !== 0);
+  }, [cart.length]);
+
   useEffect(() => {
     dispatch(loadOrders());
   }, []);
-  
+
   useEffect(() => {
     dispatch(loadOrders());
-  }, [orders,status]);
+  }, [orders, status]);
 
   const Checkout = () => {
 
-    if (cart.length == 0) setStatus("Cart is empty");
+    if (cart.length == 0) {setStatus("Cart is empty")}
     else {
+      setIsCheckoutVisible(true);
       const Order = { user: currentUser, items: cart };
       dispatch(placeOrder(Order));
       dispatch(loadOrders());
       setStatus("Order Placed");
     }
+    setTimeout(() => { 
+      setStatus("");
+    }, 1000);
   }
 
   const Delete = (id) => {
     dispatch(deleteFromCart(id));
     setStatus("Item deleted from cart");
+    setTimeout(() => { 
+      setStatus("");
+    }, 1000);
 
   }
   if (isLoggedIn == "false") return <div>please login first</div>
   else return (
     <div>
+      <div className='status'><h3>{status}</h3></div>
       <h1>Cart</h1>
       <h2>Welcome to your cart!</h2>
 
       <h3>{cart.length} Items added :</h3>
       <ul>
         {cart.map(item => (
-          
-          <div className=''>
-           
-            <li key={item._id}>
-            <p className='listitem'>{cart.indexOf(item)+1}. {item.name} - ${item.price} </p>
-            <button className='cartbutton' onClick={() => Delete(item._id)}>Delete</button> 
-                      
-            
-          </li></div>
+          <div className='' key={item._id}>
+            <li>
+              <p className='listitem'>{cart.indexOf(item) + 1}. {item.name} - ${item.price} </p>
+              <button className='cartbutton' onClick={() => Delete(item._id)}>Delete</button>
+            </li>
+          </div>
         ))}
       </ul>
-      <br/>
-      <button className='registerbutton' onClick={Checkout}>Checkout</button>
-      <br /><br /><br />
-      STATUS  :  {status}
-
+      <button 
+  className='registerbutton' 
+  onClick={Checkout} 
+  style={{ display: isCheckoutVisible ? 'block' : 'none' }}
+>
+  Checkout
+</button>
+      
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import { addToCart, loadstate} from '../reducers/postReducer';
+import { addToCart, loadstate } from '../reducers/postReducer';
 import { useDispatch } from 'react-redux';
 
 
@@ -12,43 +12,51 @@ function Dashboard() {
   const [status, setStatus] = useState("");
 
   const AddToCart = (item) => {
-    if(cart.some(e => e._id === item._id)) {
+    if (cart.some(e => e._id === item._id)) {
       setStatus("Item already in cart");
+      setTimeout(() => { 
+        setStatus("");
+      }, 1000);
       return;
     }
     dispatch(addToCart(item));
-    console.log(`Item ${item._id} added to cart.`);
     setStatus(`${item.name} - added to cart.`);
+    setTimeout(() => { 
+      setStatus("");
+    }, 1000);
   };
-    const catalog = useSelector((state) => state.posts.catalog);
-const items = catalog;
-    
-    
-    const dispatch= useDispatch();
-    useEffect(() => {
-      // dispatch(load());
-      dispatch(loadstate());
-      //pvtcart=[];
-    }, []);
+  const catalog = useSelector((state) => state.posts.catalog);
+  const items = catalog;
+
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // dispatch(load());
+    dispatch(loadstate());
+    //pvtcart=[];
+  }, []);
 
   return (
     <div>
+      <div className='status'><h3>{status}</h3></div>
       <h1>Dashboard</h1>
       <h2>Welcome to your Shopping Website!</h2>
 
       <h3>Available Items:</h3>
       <ul>
-        {items.map(item => (
-          <div className='list'><li 
-          key={item.name}><div className='listitem'>
-            {items.indexOf(item)+1}. {item.name} - ${item.price} </div>
-            <button className='cartbutton' onClick={() => AddToCart(item)}>Add to Cart</button>
-            </li></div>
+        {items.map((item, index) => (
+          <div className='list' key={item.name + index}>
+            <li>
+              <div className='listitem'>
+                {index + 1}. {item.name} - ${item.price}
+              </div>
+              <button className='cartbutton' onClick={() => AddToCart(item)}>Add to Cart</button>
+            </li>
+          </div>
         ))}
       </ul>
       
-      <br/><br/><br/><div>STATUS  :  {status}</div>
-     
+
     </div>
   );
 }

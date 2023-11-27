@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 var data = [];
 var catalog = [];
 var temp = "false";
-var orders = [];
+export var orders = [];
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc";
 
 const postSlice = createSlice({
@@ -89,8 +89,6 @@ const postSlice = createSlice({
           if (response.ok) {
             const users = await response.json();
             data = users.data;
-
-            console.log('Loading All users:', users.data);
           } else {
             console.error('Failed to fetch users:', response.statusText);
             // Handle errors if the request fails
@@ -115,8 +113,6 @@ const postSlice = createSlice({
           if (response.ok) {
             const Catalogfromapi = await response.json();
             catalog = Catalogfromapi.data;
-
-            console.log('Loading All catalog:', Catalogfromapi.data);
           } else {
             console.error('Failed to fetch catalog:', response.statusText);
             // Handle errors if the request fails
@@ -235,6 +231,7 @@ const postSlice = createSlice({
       };
 
       const getOrders = async () => {
+
         try {
           const response = await fetch('https://smooth-comfort-405104.uc.r.appspot.com/document/findAll/orders', {
             method: 'GET',

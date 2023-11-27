@@ -25,6 +25,9 @@ const App = () => {
       <div>
         <NavBar />
       </div>
+      <br/>
+      <div className='banner'>
+		<p >SHOPPING WEBSITE</p></div>
       <div className="app-container">
         <Routes>
           <Route path="/" exact element={

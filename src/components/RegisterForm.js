@@ -11,10 +11,10 @@ const initilizePost = {
 };
 const RegisterForm = () => {
 	const [post, setPost] = useState(initilizePost);
+	const [status, setStatus] = useState("");
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const posts = useSelector((state) => state.posts.posts);
-	console.log("POSTS:");	
+	const posts = useSelector((state) => state.posts.posts);	
 	posts.map((post) => console.log(post));
 
 	const handleChange = (e) => {
@@ -28,8 +28,13 @@ const RegisterForm = () => {
 	const handleRegister = () => {
 		if (post.username && post.password) {
 			dispatch(register({username:post.username,password:post.password}));
-			navigate('/');
-		};
+			setStatus("REGISTERED SUCCESSFULLY");
+			setTimeout(() => {  // Use setTimeout to allow time for the delete action to complete
+				navigate('/');
+			  }, 600);
+			
+		}
+		else setStatus("INCORRECT USERNAME OR PASSWORD");
 			setPost(initilizePost);
 			
 		}
@@ -41,7 +46,7 @@ const RegisterForm = () => {
 			className='input'
 				type="text"
 				name="username"
-				placeholder="USERNAME"
+				placeholder="NEW USERNAME"
 				value={post.username}
 				onChange={(e) => handleChange(e)}
 			/>
@@ -50,7 +55,7 @@ const RegisterForm = () => {
 			className='input'
 				type="text"
 				name="password"
-				placeholder="PASSWORD"
+				placeholder="NEW PASSWORD"
 				value={post.password}
 				onChange={(e) => handleChange(e)}
 			/>
@@ -58,8 +63,11 @@ const RegisterForm = () => {
 		</div>
 			<div className='main'>
 			<button className='button' onClick={handleRegister}>Submit</button>
+			
+		
 		
 		</div>
+		<h3 className='main'>{status}</h3>
 		</div>
 	);
 };

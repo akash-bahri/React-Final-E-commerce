@@ -55,9 +55,12 @@ const LoginForm = () => {
 	
 
 	return (
+		
 		<div className='login'>
-		<div className='main'>
-			<input
+			
+		<div>
+			
+			<div  className='main'> <input
 				type="text"
 				className='input'
 				name="username"
@@ -66,13 +69,14 @@ const LoginForm = () => {
 				onChange={(e) => handleChange(e)}
 			/>
 			<input
-				type="text"
+				type="password"
 				className='input'
 				name="password"
 				placeholder="PASSWORD"
 				value={post.password}
 				onChange={(e) => handleChange(e)}
 			/>
+			</div>
 			</div>
 			<div className='main buttons'>
 			<br />
