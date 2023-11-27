@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import { addPost, load, login, register, addToCart, loadstate,DeleteOrder, placeOrder, loadOrders } from '../reducers/postReducer';
+import { DeleteOrder, placeOrder, loadOrders } from '../reducers/postReducer';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,7 +23,6 @@ function Orders() {
   const Delete = (id) => {
     dispatch(DeleteOrder(id));
     setTimeout(() => {  // Use setTimeout to allow time for the delete action to complete
-      dispatch(loadOrders());
       setStatus("Order deleted");
     }, 500); // 500 ms delay, adjust as needed
   }
@@ -43,7 +42,7 @@ function Orders() {
               </li>
               </div>             
             ))}
-            <button onClick={() => Delete(items._id)}>{items.user.username}Delete</button>
+            <button onClick={() => Delete(items._id)}>Delete</button>
           </div>
         ))}
       </ol>

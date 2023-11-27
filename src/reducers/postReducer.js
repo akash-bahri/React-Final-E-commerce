@@ -9,6 +9,7 @@ var data = [];
 var catalog = [];
 var temp = "false";
 var orders = [];
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc";
 
 const postSlice = createSlice({
 
@@ -39,8 +40,7 @@ const postSlice = createSlice({
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc"
-              // Add any other headers required by your API (e.g., authorization headers)
+              'Authorization': token
             },
             body: JSON.stringify(userdata), // Convert data to JSON format
           });
@@ -162,8 +162,7 @@ const postSlice = createSlice({
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc"
-              // Add any other headers required by your API (e.g., authorization headers)
+              'Authorization': token
             },
             body: JSON.stringify(order), // Convert data to JSON format
           });
@@ -188,8 +187,7 @@ const postSlice = createSlice({
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc"
-              // Add any other headers required by your API (e.g., authorization headers)
+              'Authorization': token
             } // Convert data to JSON format
           });
 
@@ -219,8 +217,7 @@ const postSlice = createSlice({
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc"
-              // Add any other headers required by your API (e.g., authorization headers)
+              'Authorization': token
             } // Convert data to JSON format
           });
 
@@ -252,9 +249,8 @@ const postSlice = createSlice({
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc"
-              // Add any other headers required by your API (e.g., authorization headers)
-            } // Convert data to JSON format
+              'Authorization': token
+            }
           });
           if (response.ok) {
             const deleted = await response.json();
@@ -277,7 +273,7 @@ const postSlice = createSlice({
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTZiYWU4NGI4YzFjNDcxZmI4MmFhNiIsInVzZXJuYW1lIjoiMDAyODk3MDA4UyIsImlhdCI6MTcwMDE4Mjc2OCwiZXhwIjoxNzAxNDc4NzY4fQ.4MTEsshkBbRPMlY6HmhZ6UiWiBnIjH9o2F_1tIohUGc"
+              'Authorization': token
               // Add any other headers required by your API (e.g., authorization headers)
             } // Convert data to JSON format
           });
