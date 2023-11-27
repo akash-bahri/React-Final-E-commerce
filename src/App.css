@@ -19,7 +19,81 @@ a.navbar {
   color: white;
   text-decoration: none;
 }
+/* styles.css */
+
+
+
 
 .app-container {
 padding: 20px; /* Adjust the padding value as needed */
+}
+
+/* LoginForm.css */
+
+/* Style for input fields */
+.main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.input {
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+#logout{
+  display: flex;
+  justify-content: flex-end;
+}
+.navbuttons{
+  display: flex;
+  
+  
+ 
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #b46f00;
+  color: #fff;
+  width: fill;
+}
+
+/* Style for buttons */
+.button {
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #007bff; /* Change the background color as needed */
+  color: #fff;
+  width: 500px;
+}
+.registerbutton{
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #0099b4;
+  color: #fff;
+  width: 500px;
+}
+
+.registerbutton:hover{
+  background-color: #00697b;
+}
+
+.button:hover {
+  background-color: #0056b3; /* Change the hover color as needed */
+}
+
+/* Style for error message */
+.errorMessage {
+  color: red;
+  font-weight: bold;
 }
