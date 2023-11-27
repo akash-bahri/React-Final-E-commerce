@@ -1,7 +1,7 @@
 // PostForm.js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addPost, load, login, register, loadstate,loadOrders } from '../reducers/postReducer';
+import { load, login, loadstate,loadOrders } from '../reducers/postReducer';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -56,7 +56,7 @@ const LoginForm = () => {
 
 	return (
 		<div className='login'>
-		<div class='main'>
+		<div className='main'>
 			<input
 				type="text"
 				className='input'
@@ -74,15 +74,15 @@ const LoginForm = () => {
 				onChange={(e) => handleChange(e)}
 			/>
 			</div>
-			<div class='main buttons'>
+			<div className='main buttons'>
 			<br />
 			<button className='button' onClick={handleLogin}>Login</button>
 			</div>
-			<div class='main'>
+			<div className='main'>
 			<button className='registerbutton' onClick={() => navigate('/register')}>Create New Account</button>
 			
 			</div>
-			<div class='main'>
+			<div className='main'>
 				<p style={{ color: 'red', fontWeigh: 'bold' }}>{logon}</p>
 			</div>
 		

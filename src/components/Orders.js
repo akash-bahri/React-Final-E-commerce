@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import { DeleteOrder, placeOrder, loadOrders } from '../reducers/postReducer';
+import { DeleteOrder, loadOrders } from '../reducers/postReducer';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 function Orders() {
   const [status, setStatus] = useState("default");
@@ -35,14 +34,15 @@ function Orders() {
       <ol type='1'>
         {myOrder.map(items => (
           <div>
+            <div>
             <h4>{myOrder.indexOf(items) + 1}. Order ID: {items._id}</h4>
             {items.items.map(item => (
-              <div><li key={item._id}>
+              <div  className='listitems'><li key={item._id}>
                 {item.name} - ${item.price}<br/>                        
               </li>
-              </div>             
-            ))}
-            <button onClick={() => Delete(items._id)}>Delete</button>
+              </div>          
+            ))}</div>   
+            <button  className='cartbutton' onClick={() => Delete(items._id)}>Delete</button>
           </div>
         ))}
       </ol>

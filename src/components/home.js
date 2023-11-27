@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import { addPost, load, login, register,addToCart, loadstate} from '../reducers/postReducer';
+import { addToCart, loadstate} from '../reducers/postReducer';
 import { useDispatch } from 'react-redux';
 
 
@@ -20,10 +20,6 @@ function Dashboard() {
     console.log(`Item ${item._id} added to cart.`);
     setStatus(`${item.name} - added to cart.`);
   };
-
- 
-    const AllUsers = useSelector((state) => state.posts.AllUsers);
-    const loggendIn = useSelector((state) => state.posts.isLoggedIn); 
     const catalog = useSelector((state) => state.posts.catalog);
 const items = catalog;
     
@@ -43,10 +39,10 @@ const items = catalog;
       <h3>Available Items:</h3>
       <ul>
         {items.map(item => (
-          <div><li 
-          key={item._id}>
-            {items.indexOf(item)+1}. {item.name} - ${item.price} 
-            <button onClick={() => AddToCart(item)}>Add to Cart</button>
+          <div className='list'><li 
+          key={item.name}><div className='listitem'>
+            {items.indexOf(item)+1}. {item.name} - ${item.price} </div>
+            <button className='cartbutton' onClick={() => AddToCart(item)}>Add to Cart</button>
             </li></div>
         ))}
       </ul>

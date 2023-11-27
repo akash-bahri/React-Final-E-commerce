@@ -2,9 +2,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import RegisterForm from './components/RegisterForm';
-import PostList from './components/PostList';
-import PostView from './components/PostView';
-import PostEdit from './components/PostEdit';
 import Login from './components/login';
 import NavBar from './components/NavBar';
 import Home from './components/home';
@@ -39,8 +36,6 @@ const App = () => {
           } />
           <Route path="/home" element={<Home />} />
           <Route path="/register" element={<RegisterForm />} />
-          <Route path="/view/:postId" element={<PostView />} />
-          <Route path="/edit/:postId" element={<PostEdit />} />
           <Route path="/Cart" element={<Cart />} />
           <Route path="/orders" element={<Orders />} />
 

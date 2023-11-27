@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import { addPost, load, login, register, addToCart, deleteFromCart, loadstate, placeOrder, loadOrders } from '../reducers/postReducer';
+import { deleteFromCart, placeOrder, loadOrders } from '../reducers/postReducer';
 import { useDispatch } from 'react-redux';
 
 function Cart() {
@@ -45,18 +45,18 @@ function Cart() {
       <ul>
         {cart.map(item => (
           
-          <div>
+          <div className=''>
            
             <li key={item._id}>
-            <p>{cart.indexOf(item)+1}. {item.name} - ${item.price} 
-            <button onClick={() => Delete(item._id)}>Delete</button> </p>
+            <p className='listitem'>{cart.indexOf(item)+1}. {item.name} - ${item.price} </p>
+            <button className='cartbutton' onClick={() => Delete(item._id)}>Delete</button> 
                       
             
           </li></div>
         ))}
       </ul>
       <br/>
-      <button onClick={Checkout}>Checkout</button>
+      <button className='registerbutton' onClick={Checkout}>Checkout</button>
       <br /><br /><br />
       STATUS  :  {status}
 

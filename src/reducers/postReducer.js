@@ -1,9 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import React, { useState, useEffect } from "react";
-//import {NavLogin} from '../App'
-import { Login } from '../components/login';
-import { useNavigate } from 'react-router-dom';
-
 
 var data = [];
 var catalog = [];
@@ -28,10 +23,8 @@ const postSlice = createSlice({
     register: (state, action) => {
 
       var userdata = {
-        // Your data object to be sent to the API
         username: action.payload.username,
         password: action.payload.password
-        // Add other keys and values as needed
       };
       state.posts.push(userdata);
       const registerUser = async () => {
@@ -42,20 +35,17 @@ const postSlice = createSlice({
               'Content-Type': 'application/json',
               'Authorization': token
             },
-            body: JSON.stringify(userdata), // Convert data to JSON format
+            body: JSON.stringify(userdata),
           });
 
           if (response.ok) {
             const responseData = await response.json();
             console.log('Data posted successfully:', responseData);
-            // Handle successful response from the API
           } else {
             console.error('Failed to post data:', response.statusText);
-            // Handle errors if the request fails
           }
         } catch (error) {
           console.error('Error posting data:', error);
-          // Handle any network or other errors
         }
       };
       registerUser();
@@ -67,18 +57,15 @@ const postSlice = createSlice({
       var password = action.payload.password;
       const userExists = data.find((user) => user.username === username && user.password === password);
       if (userExists) {
-        console.log("login success")
         temp = "true";
         state.isLoggedIn = temp;
         state.currentUser = userExists;
       }
       else {
-        console.log("login failed")
         temp = "false";
         state.isLoggedIn = temp;
         state.currentUser = {};
       }
-      // return temp;
     },
     loadstate: (state, action) => {
       state.AllUsers = data;
@@ -87,9 +74,6 @@ const postSlice = createSlice({
 
     },
     load: (state, action) => {
-
-      //  var username= action.payload.username;
-      //  var password= action.payload.password;
       const getUsers = async () => {
         try {
           const response = await fetch('https://smooth-comfort-405104.uc.r.appspot.com/document/findAll/userx', {
@@ -147,8 +131,6 @@ const postSlice = createSlice({
     },
     addToCart: (state, action) => {
       state.cart = [...state.cart, action.payload];
-      // console.log("here")
-      // console.log(state.cart[0]);
     },
     deleteFromCart: (state, action) => {
       state.cart = state.cart.filter((item) => item._id !== action.payload);
@@ -164,20 +146,17 @@ const postSlice = createSlice({
               'Content-Type': 'application/json',
               'Authorization': token
             },
-            body: JSON.stringify(order), // Convert data to JSON format
+            body: JSON.stringify(order),
           });
 
           if (response.ok) {
             const responseData = await response.json();
             console.log('Order placed successfully:', responseData);
-            // Handle successful response from the API
           } else {
             console.error('Failed to place order:', response.statusText);
-            // Handle errors if the request fails
           }
         } catch (error) {
           console.error('Error placing order:', error);
-          // Handle any network or other errors
         }
       };
       placeNewOrder();
@@ -188,22 +167,18 @@ const postSlice = createSlice({
             headers: {
               'Content-Type': 'application/json',
               'Authorization': token
-            } // Convert data to JSON format
+            }
           });
 
 
           if (response.ok) {
             const Ordersfromapi = await response.json();
             orders = Ordersfromapi.data;
-
-            console.log('Loading All catalog:', Ordersfromapi.data);
           } else {
             console.error('Failed to fetch catalog:', response.statusText);
-            // Handle errors if the request fails
           }
         } catch (error) {
           console.error('Error fetching catalog:', error);
-          // Handle any network or other errors
         }
       };
       getOrders();
@@ -218,22 +193,18 @@ const postSlice = createSlice({
             headers: {
               'Content-Type': 'application/json',
               'Authorization': token
-            } // Convert data to JSON format
+            }
           });
 
 
           if (response.ok) {
             const Ordersfromapi = await response.json();
             orders = Ordersfromapi.data;
-
-            console.log('Loading All catalog:', Ordersfromapi.data);
           } else {
             console.error('Failed to fetch catalog:', response.statusText);
-            // Handle errors if the request fails
           }
         } catch (error) {
           console.error('Error fetching catalog:', error);
-          // Handle any network or other errors
         }
       };
       getOrders();
@@ -257,13 +228,9 @@ const postSlice = createSlice({
             console.log(deleted.message);
           } else {
             console.error('Failed to delete', response.statusText);
-            console.log(id);
-            console.log(link);
-            // Handle errors if the request fails
           }
         } catch (error) {
           console.error('Error deleting', error);
-          // Handle any network or other errors
         }
       };
 
@@ -274,23 +241,17 @@ const postSlice = createSlice({
             headers: {
               'Content-Type': 'application/json',
               'Authorization': token
-              // Add any other headers required by your API (e.g., authorization headers)
-            } // Convert data to JSON format
+            } 
           });
-
 
           if (response.ok) {
             const Ordersfromapi = await response.json();
             orders = Ordersfromapi.data;
-
-            console.log('Loading All catalog:', Ordersfromapi.data);
           } else {
             console.error('Failed to fetch catalog:', response.statusText);
-            // Handle errors if the request fails
           }
         } catch (error) {
           console.error('Error fetching catalog:', error);
-          // Handle any network or other errors
         }
       };
       deleteOrders();
@@ -308,6 +269,6 @@ const postSlice = createSlice({
 });
 
 
-export const { addPost, editPost, load, logout, login, register, deleteFromCart, DeleteOrder,
+export const { load, logout, login, register, deleteFromCart, DeleteOrder,
   loadstate, addToCart, placeOrder, loadOrders } = postSlice.actions;
 export default postSlice.reducer;
