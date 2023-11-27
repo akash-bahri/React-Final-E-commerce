@@ -24,13 +24,16 @@ function Orders() {
   const Delete = (id) => {
     dispatch(DeleteOrder(id));
     dispatch(loadOrders());
-    setStatus("Order deleted");
+    setStatus("order deleted");
     setTimeout(() => {  // Use setTimeout to allow time for the delete action to complete
-      setStatus("Orders deleted");
-    }, 600); // 500 ms delay, adjust as needed
+      setStatus("");
+    }, 600); 
+    // setTimeout(() => {  // Use setTimeout to allow time for the delete action to complete
+    //   setStatus("");
+    // }, 2000);
   }
 
-  if (isLoggedIn == "false") return <div>please login first</div>
+  if (isLoggedIn == "false") return <div className='status'>Please Login !!!</div>
   else return (
     <div>
       <div className='status'><h3>{status}</h3></div>

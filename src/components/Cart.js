@@ -50,7 +50,7 @@ function Cart() {
     }, 1000);
 
   }
-  if (isLoggedIn == "false") return <div>please login first</div>
+  if (isLoggedIn == "false") return <div className='status'>Please Login !!!</div>
   else return (
     <div>
       <div className='status'><h3>{status}</h3></div>

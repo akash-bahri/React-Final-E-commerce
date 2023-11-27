@@ -31,16 +31,20 @@ const RegisterForm = () => {
 			setStatus("REGISTERED SUCCESSFULLY");
 			setTimeout(() => {  // Use setTimeout to allow time for the delete action to complete
 				navigate('/');
-			  }, 600);
+			  }, 1000);
 			
 		}
 		else setStatus("INCORRECT USERNAME OR PASSWORD");
+		setTimeout(() => {  // Use setTimeout to allow time for the delete action to complete
+			setStatus("");
+		  }, 1000);
 			setPost(initilizePost);
 			
 		}
 
 	return (
 		<div>
+		<div className='status'><h3>{status}</h3></div>
 		<div className='main'>
 			<input
 			className='input'
@@ -67,7 +71,6 @@ const RegisterForm = () => {
 		
 		
 		</div>
-		<h3 className='main'>{status}</h3>
 		</div>
 	);
 };
