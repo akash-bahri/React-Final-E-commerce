@@ -26,11 +26,15 @@ li {
   width: auto;
   font-weight: bold;
   font-size:large ;
- text-align: center;
-  background-color: #b46f00;
+  text-align: center;
+  background-color: #333;
   color: #fff;
+  border: solid 1px #fffcfc;
   border-radius: 4px;
   cursor: pointer;
+}
+#logout:hover {
+  background-color: #9c3c49;
 }
 li.logout {
   margin-right: 0;
@@ -38,7 +42,7 @@ li.logout {
 }
 
 a.navbar {
-  color: white;
+  color: rgb(255, 255, 255);
   text-decoration: none;
   align-items: center;
   justify-content: center;
@@ -62,6 +66,9 @@ a.navbar {
   justify-content: center;
   border: solid 1px white;
 }
+a.navbar:hover {
+  background-color: #2c77c8;
+}
 /* styles.css */
 
 body {
@@ -73,7 +80,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 5px;
-  background-color: rgb(203, 200, 187);
+  text-decoration: underline;
 }
 
 
@@ -94,8 +101,8 @@ padding: 20px; /* Adjust the padding value as needed */
   align-items: center;
 font-weight: bold;
 font-family:monospace;
-color: turquoise;
-text-shadow: black 0.1em 0.1em 0.2em;
+color: #FBFCFF;
+text-shadow: #605856 0.1em 0.1em 0.2em;
 font-size: 20px;
 }
 .input {
@@ -110,28 +117,13 @@ font-size: 20px;
   justify-content: flex-end;
 }
 
-.navbuttons{
-  display: flex; 
-  padding: 20px;
-  margin: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #b46f00;
-  color: #fff;
-  width: fill;
-}
-.navbuttons:hover{
-  background-color: #b46f00;
-}
-
 .cartbutton{
   padding: 10px;
   margin: 10px;
   border: 1px solid rgb(44, 42, 42);
   border-radius: 4px;
   cursor: pointer;
-  background-color: #b46f00;
+  background-color: #274156;
   color: #fffcfc;
   width: 100px;
 }
@@ -142,12 +134,15 @@ font-size: 20px;
   border: 1px solid rgb(44, 42, 42);
   border-radius: 4px;
   cursor: pointer;
-  background-color: #b46f00;
+  background-color: #605856;
   color: #fffcfc;
   width: 200px;
 }
+.cartbuttons:hover{
+  background-color: rgb(48, 47, 48);
+}
 .cartbutton:hover{
-  background-color: #5d3900;
+  background-color: #2c77c8;
 }
 
 /* Style for buttons */
@@ -157,7 +152,7 @@ font-size: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
-  background-color: #007bff; /* Change the background color as needed */
+  background-color: #274156; /* Change the background color as needed */
   color: #fff;
   width: 500px;
 }
@@ -167,17 +162,31 @@ font-size: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
-  background-color: #0099b4;
+  background-color: #1C6E8C;
   color: #fff;
   width: 500px;
 }
 
+.checkoutbutton{
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid rgb(44, 42, 42);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #1C6E8C;
+  color: #ffffff;
+  width: 300px;
+}
+.checkoutbutton:hover{
+  background-color: #2aaac1;
+}
+
 .registerbutton:hover{
-  background-color: #00697b;
+  background-color: #2aaac1;
 }
 
 .button:hover {
-  background-color: #0056b3; /* Change the hover color as needed */
+  background-color: #2c77c8; /* Change the hover color as needed */
 }
 
 /* Style for error message */
@@ -198,6 +207,6 @@ font-size: 20px;
  
   font-weight: bold;
   font-size: 25px;
-  background-color: rgb(154, 138, 138);
+  background-color: #605856;
 }
 

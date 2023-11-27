@@ -53,10 +53,9 @@ function Cart() {
   if (isLoggedIn == "false") return <div className='status'>Please Login !!!</div>
   else return (
     <div>
-      <div className='status'><h3>{status}</h3></div>
+      <div className='status'>{status}</div>
       <h1>Cart</h1>
       <h2>Welcome to your cart!</h2>
-
       <h3>{cart.length} Items added :</h3>
       <ul>
         {cart.map(item => (
@@ -69,7 +68,7 @@ function Cart() {
         ))}
       </ul>
       <button 
-  className='registerbutton' 
+  className='checkoutbutton' 
   onClick={Checkout} 
   style={{ display: isCheckoutVisible ? 'block' : 'none' }}
 >

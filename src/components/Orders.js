@@ -36,7 +36,7 @@ function Orders() {
   if (isLoggedIn == "false") return <div className='status'>Please Login !!!</div>
   else return (
     <div>
-      <div className='status'><h3>{status}</h3></div>
+      <div className='status'>{status}</div>
       <h1>Orders</h1>
       <h2>Welcome to your orders!.</h2>
       <ol type='1'>

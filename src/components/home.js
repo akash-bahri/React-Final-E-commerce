@@ -38,10 +38,9 @@ function Dashboard() {
 
   return (
     <div>
-      <div className='status'><h3>{status}</h3></div>
+      <div className='status'>{status}</div>
       <h1>Dashboard</h1>
       <h2>Welcome to your Shopping Website!</h2>
-
       <h3>Available Items:</h3>
       <ul>
         {items.map((item, index) => (
