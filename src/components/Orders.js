@@ -30,7 +30,7 @@ function Orders() {
   else return (
     <div>
       <h1>Orders</h1>
-      <h2>Welcome to your orders! This is a protected area.</h2>
+      <h2>Welcome to your orders!.</h2>
       <ol type='1'>
         {myOrder.map(items => (
           <div>

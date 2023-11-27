@@ -2,6 +2,42 @@ nav {
   background-color: #333;
   color: white;
   padding: 10px;
+  display: flex; /* Added for flex layout */
+  justify-content: space-between; /* Added to space out elements */
+}
+ul.navbutt {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Changed to flex */
+  flex-grow: 1; /* Added to allow left items to take available space */
+}
+li {
+  display: inline-block;
+  margin-right: 10px;
+}
+#logout {
+ 
+  padding: 10px;
+  padding-right: 25px;
+  padding-left: 25px;
+  width: auto;
+  font-weight: bold;
+  font-size:large ;
+ text-align: center;
+  background-color: #b46f00;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+li.logout {
+  margin-right: 0;
+  margin-left: auto; /* Added to push the logout to the right */
+}
+
+a.navbar {
+  color: white;
+  text-decoration: none;
 }
 
 ul {
@@ -10,10 +46,6 @@ ul {
   padding: 0;
 }
 
-li {
-  display: inline-block;
-  margin-right: 10px;
-}
 
 a.navbar {
   color: white;
@@ -57,6 +89,7 @@ padding: 20px; /* Adjust the padding value as needed */
   display: flex;
   justify-content: flex-end;
 }
+
 .navbuttons{
   display: flex; 
   padding: 20px;

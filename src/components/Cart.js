@@ -38,10 +38,10 @@ function Cart() {
   if (isLoggedIn == "false") return <div>please login first</div>
   else return (
     <div>
-      <h2>cart</h2>
-      <p>Welcome to your cart! This is a protected area.</p>
+      <h1>Cart</h1>
+      <h2>Welcome to your cart!</h2>
 
-      <h3>Available Items:</h3>
+      <h3>{cart.length} Items added :</h3>
       <ul>
         {cart.map(item => (
           

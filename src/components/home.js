@@ -33,8 +33,8 @@ const items = catalog;
 
   return (
     <div>
-      <h2>Dashboard</h2>
-      <p>Welcome to your dashboard! This is a protected area.</p>
+      <h1>Dashboard</h1>
+      <h2>Welcome to your Shopping Website!</h2>
 
       <h3>Available Items:</h3>
       <ul>
