@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 function Dashboard() {
   const cart = useSelector((state) => state.posts.cart);
   const [status, setStatus] = useState("");
+  const dispatch = useDispatch();
 
   const AddToCart = (item) => {
     if (cart.some(e => e._id === item._id)) {
@@ -27,9 +28,7 @@ function Dashboard() {
   };
   const catalog = useSelector((state) => state.posts.catalog);
   const items = catalog;
-
-
-  const dispatch = useDispatch();
+ 
   useEffect(() => {
     // dispatch(load());
     dispatch(loadstate());

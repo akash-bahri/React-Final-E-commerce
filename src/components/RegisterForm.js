@@ -25,6 +25,7 @@ const RegisterForm = () => {
 			[name]: newValue,
 		});
 	}
+	
 	const handleRegister = () => {
 		if (post.username && post.password) {
 			dispatch(register({username:post.username,password:post.password}));

@@ -50,7 +50,6 @@ const postSlice = createSlice({
       };
       registerUser();
     },
-
     login: (state, action) => {
 
       var username = action.payload.username;
@@ -267,5 +266,5 @@ const postSlice = createSlice({
 
 
 export const { load, logout, login, register, deleteFromCart, DeleteOrder,
-  loadstate, addToCart, placeOrder, loadOrders } = postSlice.actions;
+loadstate, addToCart, placeOrder, loadOrders } = postSlice.actions;
 export default postSlice.reducer;

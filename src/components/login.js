@@ -28,8 +28,11 @@ const LoginForm = () => {
 	useEffect(() => {
 		if (isLoggedIn == "true") {
 			navigate('/home');
-
 		}
+		else setLogon("INCORRECT USERNAME OR PASSWORD");
+		setTimeout(() => { 
+			setLogon("");
+		  }, 1000);
 	}, [isLoggedIn]);
 
 	const handleChange = (e) => {
@@ -50,6 +53,7 @@ const LoginForm = () => {
 			setPost(initilizePost);
 		}
 		else setLogon("INCORRECT USERNAME OR PASSWORD");
+		if(isLoggedIn == "false") setLogon("INCORRECT USERNAME OR PASSWORD");
 		setTimeout(() => { 
 			setLogon("");
 		  }, 1000);

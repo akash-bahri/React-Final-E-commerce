@@ -10,10 +10,12 @@ const NavBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.posts.currentUser);
+  
   const Logout=() => {
     dispatch(logout());
     navigate('/');
   }
+  
   return (
     <nav>
       <ul className='navbutt'> 

@@ -21,10 +21,6 @@ function Cart() {
 
   useEffect(() => {
     dispatch(loadOrders());
-  }, []);
-
-  useEffect(() => {
-    dispatch(loadOrders());
   }, [orders, status]);
 
   const Checkout = () => {
