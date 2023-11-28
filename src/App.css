@@ -41,6 +41,8 @@ li.logout {
   margin-left: auto; /* Added to push the logout to the right */
 }
 
+
+
 a.navbar {
   color: rgb(255, 255, 255);
   text-decoration: none;
@@ -211,3 +213,6 @@ font-size: 20px;
   background-color: #605856;
 }
 
+.user{font-size: 25px;
+  font-family:cursive;
+}

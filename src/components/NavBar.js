@@ -26,7 +26,7 @@ const NavBar = () => {
         <li>
         <Link className="navbar" to="/orders">Orders</Link>
         </li>
-        <li className='logout'>
+        <li className='logout user'>
         {currentUser.username}
         </li>
         <li className='logout'>          

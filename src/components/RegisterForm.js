@@ -29,13 +29,13 @@ const RegisterForm = () => {
 		if (post.username && post.password) {
 			dispatch(register({username:post.username,password:post.password}));
 			setStatus("REGISTERED SUCCESSFULLY");
-			setTimeout(() => {  // Use setTimeout to allow time for the delete action to complete
+			setTimeout(() => {  
 				navigate('/');
 			  }, 1000);
 			
 		}
 		else setStatus("INCORRECT USERNAME OR PASSWORD");
-		setTimeout(() => {  // Use setTimeout to allow time for the delete action to complete
+		setTimeout(() => {
 			setStatus("");
 		  }, 1000);
 			setPost(initilizePost);
