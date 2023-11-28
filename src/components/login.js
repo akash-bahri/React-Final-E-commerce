@@ -24,12 +24,12 @@ const LoginForm = () => {
 		dispatch(load());
 		dispatch(loadOrders());
 		dispatch(loadstate());
+		setLogon("");
 	}, []);
 	useEffect(() => {
 		if (isLoggedIn == "true") {
 			navigate('/home');
 		}
-		else setLogon("INCORRECT USERNAME OR PASSWORD");
 		setTimeout(() => { 
 			setLogon("");
 		  }, 1000);
